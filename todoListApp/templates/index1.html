@@ -1,0 +1,53 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+  <h3>Mis To-Dos</h3>
+<a class="btn btn-primary" href="{% url 'list_create' %}">
+  <i class="bi bi-plus-square"></i> 
+   Agregar nuevo To Do</a>
+</div>
+
+
+<div class="container mt-4">
+  {% if todos %}  
+    <table class="">
+        <thead class="text-center">
+          <tr>
+            <th>Id</th>
+            <th>Titulo</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+  
+          {% for todo in todos %}
+          <tr>
+            <td>{{ todo.id }}</td>
+            <td>{{ todo.title }} ({{todo.category}}) </td>
+            <td>
+              <a href="{% url 'list' todo.id %}" class="btn btn-warning">
+                <i class="bi bi-pencil-fill"></i>
+                Editar
+              </a>
+            </td>
+            <td>
+              <a class="btn btn-danger" href="" data-toggle="modal" data-target="#exampleModal{{todo.id}}">
+                <i class="bi bi-trash"></i>
+                Eliminar</a>
+              </a>                
+            </td>
+
+            {% include "delete_modal.html" %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% else %}
+
+        <p>Oops! No tenemos Idiomas de Libros cargados en Catálogo.</p>
+        {% endif %}
+      <br />
+{% endblock %}

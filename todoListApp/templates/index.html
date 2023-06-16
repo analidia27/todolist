@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %}
+
+{% block content %}
+    <h1>ToDo List</h1>
+    
+    <a href="{% url 'list_create' %}" class="btn btn-primary">Crear ToDo List</a>
+
+    <div class="container">
+
+        <ul>
+            {% for todo in todos %}
+                <li>
+                    <div role="button" onclick="location.href='{% url "list" todo.id %}'">
+                        {{ todo.id }} - {{ todo.title }} - {{ todo.category }} - {{ todo.due_date }} - {{ todo.status }}
+                    <a href="{% url 'item_create' todo.pk  %}" class="btn btn-primary btn-sm">Agregar item</a>
+                    <a href="{% url 'list_update' todo.pk  %}">Editar</a>
+                    <a href="{% url 'list_delete' todo.pk %}">Eliminar</a>
+                </li>
+                <ul>
+                    {% for item in todo.todoitem_set.all %}
+                        <li>{{ item.title }} - {{ item.description }}</li>
+                        <a href="{% url 'item_update' todo.pk %}">Editar</a>
+                        <a href="{% url 'item_delete' todo.pk %}">Eliminar</a>    
+                        {% empty %} 
+                        <li>No tiene items.</li>
+                    {% endfor %}
+                </ul>
+            {% empty %}
+                <li> No tienes ToDos.</li>
+            {% endfor %}
+        </ul>
+    </div>
+
+
+
+
+{% endblock %}

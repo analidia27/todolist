@@ -1,0 +1,58 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container mt-4">
+  <h3>Mis Items</h3>
+
+
+
+<div class="container mt-4">
+  {% if items %}  
+  item = items[0]
+  <a class="btn btn-primary" href="{% url item.todoList 'item_create' %}">
+    <i class="bi bi-plus-square"></i> 
+     Agregar nuevo Item </a>
+  </div>
+
+    <table class="">
+        <thead class="text-center">
+          <tr>
+            <th>Id</th>
+            <th>Titulo</th>
+            <th>todolit</th>
+            <th></th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody class="text-center">
+  
+          {% for item in items %}
+          <tr>
+            <td>{{ item.id }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.todoList }}</td>
+            <td>
+              <a href="{% url 'list_update' item.id %}" class="btn btn-warning">
+                <i class="bi bi-pencil-fill"></i>
+                Editar
+              </a>
+            </td>
+            <td>
+              <a class="btn btn-danger" href="" data-toggle="modal" data-target="#exampleModal{{item.id}}">
+                <i class="bi bi-trash"></i>
+                Eliminar</a>
+              </a>                
+            </td>
+
+            {% include "delete_modal.html" %}
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+
+      {% else %}
+
+        <p>Oops! No tenemos Idiomas de Libros cargados en Catálogo.</p>
+        {% endif %}
+      <br />
+{% endblock %}

@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+
+    <div>
+
+        <div>
+
+            <h3>Editar item:</h3>
+
+            <h5>{{ todo.title | upper }}</h5>
+
+        </div>
+
+        <ul>
+
+            {% for item in items %}
+
+            <li>
+
+                <div>
+
+                    <div
+
+                        role="button"
+
+                        onclick="location.href='#'">
+
+                        {{ item.title }}                      
+
+                    </div>
+
+                </div>
+
+            </li>
+
+            {% empty %}
+
+            <p>Oops! No tienes ítems en el To-Do.</p>
+
+            {% endfor %}
+
+        </ul>
+
+        <p>
+
+<!--             <input
+                value="Agregar nuevo Item"
+                type="button"
+                onclick="location.href='{% url "item_create" todo.id %}'" />
+ -->
+            <a href="{% url 'item_create' todo.pk  %}" class="btn btn-primary btn-sm">Agregar item</a>
+
+        </p>
+
+    </div>
+
+</div>
+
+{% endblock %}

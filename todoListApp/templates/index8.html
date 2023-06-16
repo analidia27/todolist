@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+    <!--index.html-->
+
+    <a class="btn btn-primary" href="{% url 'list_create' %}">Agregar nuevo To Do</a>
+    <h3>Mis To-Dos</h3>
+
+
+    {% if todos %}
+    <ul>
+
+        {% for todo in todos %}
+
+        <li>
+            <div role="button" onclick="location.href='{% url "list" todo.id %}'">
+
+                {{ todo.title }} ({{todo.category}})
+                <a class="btn btn-danger" href="" data-toggle="modal" data-target="#exampleModal{{todo.id}}">
+                    <i class="bi bi-trash"></i>
+                    Eliminar</a>
+            </div>                    
+
+        </li>
+            {% include "delete_modal.html" %}
+
+        {% endfor %}
+
+    </ul>
+    {%else %}
+
+        <h4>Oops! No tienes To-Dos!</h4>
+
+    {% endif %}
+
+
+{% endblock %}
+

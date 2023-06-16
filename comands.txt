@@ -1,0 +1,39 @@
+python -m venv venv
+
+venv\Scripts\activate.bat
+
+python -m pip install django=="3.2.9"
+pip install django-crispy-forms
+
+
+django-admin startproject todoProject.
+
+
+django-admin startapp todoListApp
+
+
+python manage.py migrate
+
+python manage.py createsuperuser
+
+
+requirements.txt
+python -m pip install django=="3.2.9"
+django-admin startapp popupApp
+pip install django-crispy-forms
+pip install crispy-bootstrap5
+pip install django-htmx
+
+setting.py
+apps
+'popupApp',
+'django_htmx','crispy_forms',
+'crispy_bootstrap5',
+CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"
+CRISPY_TEMPLATE_PACK = "bootstrap5"
+'DIRS': ['popupApp/templates'],
+STATIC_URL = 'static/'
+
+
+
+
